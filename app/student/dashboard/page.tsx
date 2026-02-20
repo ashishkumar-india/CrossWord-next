@@ -29,74 +29,90 @@ export default async function StudentDashboard() {
     const avgScore = completedCount > 0 ? (scoreSum / completedCount).toFixed(1) : 0;
 
     return (
-        <div className="container dashboard">
-            <div className="welcome-section">
-                <h2>Welcome back, {user.name}! 🎓</h2>
-                <p>Program: <strong>{(user as StudentPayload).program}</strong></p>
-            </div>
+        <div style={{
+            minHeight: '100vh',
+            padding: '40px 20px',
+            position: 'relative'
+        }}>
+            <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                <div className="glass-card" style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                        <h2 style={{ margin: '0 0 5px 0', fontSize: '2rem', color: 'var(--dark)' }}>Welcome back, {user.name}! 🎓</h2>
+                        <p style={{ margin: 0, color: 'var(--gray)' }}>Program: <strong>{(user as StudentPayload).program}</strong></p>
+                    </div>
+                    <Link href="/api/auth/student/logout" className="btn-modern secondary">
+                        Logout
+                    </Link>
+                </div>
 
-            <div className="stats-grid">
-                <div className="stat-card">
-                    <div className="stat-icon">🎯</div>
-                    <div className="stat-content">
-                        <h3>Completed Puzzles</h3>
-                        <div className="stat-value">{completedCount}</div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+                    <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                        <div style={{ fontSize: '2.5rem', background: 'rgba(99, 102, 241, 0.1)', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px' }}>🎯</div>
+                        <div>
+                            <h3 style={{ margin: '0 0 5px 0', fontSize: '1rem', color: 'var(--gray)' }}>Completed Puzzles</h3>
+                            <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--primary)' }}>{completedCount}</div>
+                        </div>
+                    </div>
+
+                    <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                        <div style={{ fontSize: '2.5rem', background: 'rgba(236, 72, 153, 0.1)', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px' }}>⭐</div>
+                        <div>
+                            <h3 style={{ margin: '0 0 5px 0', fontSize: '1rem', color: 'var(--gray)' }}>Average Score</h3>
+                            <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--secondary)' }}>{avgScore}%</div>
+                        </div>
                     </div>
                 </div>
-                <div className="stat-card">
-                    <div className="stat-icon">⭐</div>
-                    <div className="stat-content">
-                        <h3>Average Score</h3>
-                        <div className="stat-value">{avgScore}%</div>
-                    </div>
-                </div>
-            </div>
 
-            <div className="content-box">
-                <h3>📚 Available Puzzles</h3>
-                <div className="puzzles-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', marginTop: '20px' }}>
-                    {puzzles?.map((puzzle: any) => {
-                        const attempt = attemptMap.get(puzzle.id);
-                        const isCompleted = attempt?.attempt_status === 'completed';
-                        const isAbandoned = attempt?.attempt_status === 'abandoned';
-                        const inProgress = attempt?.attempt_status === 'in_progress';
-                        const isLocked = attempt?.locked;
+                <div className="glass-card">
+                    <h3 style={{ margin: '0 0 20px 0', fontSize: '1.5rem', borderBottom: '1px solid var(--glass-border)', paddingBottom: '15px' }}>📚 Available Puzzles</h3>
 
-                        return (
-                            <div key={puzzle.id} className="puzzle-card" style={{ padding: '20px', border: '1px solid #eee', borderRadius: '8px', background: '#fff' }}>
-                                <h4 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>{puzzle.title}</h4>
-                                <div className="puzzle-meta" style={{ color: '#666', fontSize: '14px', marginBottom: '15px' }}>
-                                    <p style={{ margin: '5px 0' }}>👨‍🏫 Teacher: {puzzle.teachers?.name}</p>
-                                    <p style={{ margin: '5px 0' }}>⏱️ Time Limit: {puzzle.time_limit} mins</p>
-                                </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
+                        {puzzles?.map((puzzle: any) => {
+                            const attempt = attemptMap.get(puzzle.id);
+                            const isCompleted = attempt?.attempt_status === 'completed';
+                            const isAbandoned = attempt?.attempt_status === 'abandoned';
+                            const inProgress = attempt?.attempt_status === 'in_progress';
+                            const isLocked = attempt?.locked;
 
-                                <div className="puzzle-action">
-                                    {!attempt || (inProgress && !isLocked) || (!isLocked && !isCompleted && !isAbandoned) ? (
-                                        <Link href={`/student/play/${puzzle.id}`} className="btn btn-primary" style={{ display: 'block', textAlign: 'center' }}>
-                                            {inProgress ? 'Resume Puzzle' : 'Start Puzzle'}
-                                        </Link>
-                                    ) : isCompleted ? (
-                                        attempt.result_published ? (
-                                            <Link href={`/student/results?puzzle=${puzzle.id}`} className="btn btn-success" style={{ display: 'block', textAlign: 'center', background: '#10b981' }}>
-                                                View Result
+                            return (
+                                <div key={puzzle.id} style={{ padding: '24px', border: '1px solid var(--glass-border)', borderRadius: '12px', background: 'var(--white)', transition: 'transform 0.2s', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }} className="hover-lift-white">
+                                    <h4 style={{ margin: '0 0 10px 0', fontSize: '1.2rem', color: 'var(--dark)' }}>{puzzle.title}</h4>
+                                    <div style={{ color: 'var(--gray)', fontSize: '0.9rem', marginBottom: '20px' }}>
+                                        <p style={{ margin: '6px 0', display: 'flex', alignItems: 'center', gap: '8px' }}><span>👨‍🏫</span> <span>Teacher: {puzzle.teachers?.name}</span></p>
+                                        <p style={{ margin: '6px 0', display: 'flex', alignItems: 'center', gap: '8px' }}><span>⏱️</span> <span>Time Limit: {puzzle.time_limit} mins</span></p>
+                                    </div>
+
+                                    <div style={{ marginTop: 'auto' }}>
+                                        {!attempt || (inProgress && !isLocked) || (!isLocked && !isCompleted && !isAbandoned) ? (
+                                            <Link href={`/student/play/${puzzle.id}`} className="btn-modern primary" style={{ display: 'flex', width: '100%' }}>
+                                                {inProgress ? 'Resume Puzzle' : 'Start Puzzle'}
                                             </Link>
-                                        ) : (
-                                            <button disabled className="btn btn-secondary" style={{ display: 'block', width: '100%', cursor: 'not-allowed' }}>
-                                                Result Pending ⏳
+                                        ) : isCompleted ? (
+                                            attempt.result_published ? (
+                                                <Link href={`/student/results?puzzle=${puzzle.id}`} className="btn-modern" style={{ display: 'flex', width: '100%', background: 'var(--success)', color: 'white' }}>
+                                                    View Result
+                                                </Link>
+                                            ) : (
+                                                <button disabled className="btn-modern secondary" style={{ display: 'flex', width: '100%', cursor: 'not-allowed', opacity: 0.7 }}>
+                                                    Result Pending ⏳
+                                                </button>
+                                            )
+                                        ) : isAbandoned ? (
+                                            <button disabled className="btn-modern" style={{ display: 'flex', width: '100%', cursor: 'not-allowed', background: 'var(--danger)', color: 'white' }}>
+                                                Time Expired ❌
                                             </button>
-                                        )
-                                    ) : isAbandoned ? (
-                                        <button disabled className="btn btn-danger" style={{ display: 'block', width: '100%', cursor: 'not-allowed', background: '#ef4444' }}>
-                                            Time Expired ❌
-                                        </button>
-                                    ) : null}
+                                        ) : null}
+                                    </div>
                                 </div>
+                            );
+                        })}
+                        {(!puzzles || puzzles.length === 0) && (
+                            <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px', color: 'var(--gray)' }}>
+                                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>📭</div>
+                                <p>No active puzzles currently available.</p>
                             </div>
-                        );
-                    })}
-                    {(!puzzles || puzzles.length === 0) && (
-                        <p style={{ color: '#666' }}>No active puzzles currently available.</p>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
