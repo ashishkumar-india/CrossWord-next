@@ -2,6 +2,7 @@ import './globals.css';
 import './styles/style.css';
 import './styles/responsive.css';
 import type { Metadata } from 'next';
+import Footer from './components/Footer';
 
 export const metadata: Metadata = {
   title: 'Crossword Game',
@@ -15,7 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', margin: 0 }}>
+        <main style={{ flex: 1 }}>{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
