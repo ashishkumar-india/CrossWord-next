@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', margin: 0 }}>
-        <main style={{ flex: 1 }}>{children}</main>
+        <main style={{ flex: 1, background: 'var(--bg-gradient)', backgroundAttachment: 'fixed' }}>{children}</main>
         <Footer />
       </body>
     </html>
