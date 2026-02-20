@@ -28,8 +28,8 @@ export default async function TeacherDashboard() {
 
     return (
         <div style={{
-            minHeight: '100vh',
-            padding: '40px 20px',
+            minHeight: '100%',
+            padding: '40px 20px 60px',
             position: 'relative'
         }}>
             <div style={{ maxWidth: '1200px', margin: '0 auto' }}>

@@ -15,7 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', margin: 0 }}>
+        <div style={{ flex: 1 }}>{children}</div>
+      </body>
     </html>
   );
 }
