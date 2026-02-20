@@ -1,6 +1,3 @@
-@import url('../public/assets/css/style.css');
-@import url('../public/assets/css/responsive.css');
-
 /* Next.js overriding basic resets so the original CSS still applies properly */
 body {
   margin: 0;
