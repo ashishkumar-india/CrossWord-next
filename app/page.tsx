@@ -85,15 +85,15 @@ export default function Home() {
               padding: '30px',
               borderRadius: '20px',
               background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-              color: 'white',
+              color: '#ffffff',
               transition: 'all 0.3s ease',
               cursor: 'pointer',
               boxShadow: '0 10px 15px -3px rgba(79, 70, 229, 0.4)',
               textAlign: 'center'
             }} className="hover-lift">
               <div style={{ fontSize: '2.5rem', marginBottom: '15px' }}>🎓</div>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>Student Portal</h3>
-              <p style={{ fontSize: '0.95rem', opacity: '0.9' }}>Join as a student to solve puzzles assigned by your teachers.</p>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '10px', color: '#ffffff', fontWeight: 600 }}>Student Portal</h3>
+              <p style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.9)' }}>Join as a student to solve puzzles assigned by your teachers.</p>
             </div>
           </Link>
 
@@ -101,7 +101,7 @@ export default function Home() {
             <div style={{
               padding: '30px',
               borderRadius: '20px',
-              background: 'white',
+              background: '#ffffff',
               color: '#1f2937',
               border: '2px solid #e5e7eb',
               transition: 'all 0.3s ease',
@@ -110,8 +110,8 @@ export default function Home() {
               textAlign: 'center'
             }} className="hover-lift-white">
               <div style={{ fontSize: '2.5rem', marginBottom: '15px' }}>👨‍🏫</div>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>Teacher Dashboard</h3>
-              <p style={{ fontSize: '0.95rem', color: '#6b7280' }}>Manage students, create puzzles, and track results effortlessly.</p>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '10px', color: '#1f2937', fontWeight: 600 }}>Teacher Dashboard</h3>
+              <p style={{ fontSize: '0.85rem', color: '#6b7280' }}>Manage students, create puzzles, and track results effortlessly.</p>
             </div>
           </Link>
         </div>
