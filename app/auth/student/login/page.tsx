@@ -33,39 +33,52 @@ export default function StudentLogin() {
     };
 
     return (
-        <div className="login-container">
-            <div className="login-box">
-                <div className="login-header">
-                    <h2>Student Login</h2>
+        <div style={{
+            minHeight: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px',
+            position: 'relative'
+        }}>
+            <div className="glass-card" style={{ width: '100%', maxWidth: '420px', position: 'relative', zIndex: 10 }}>
+                <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+                    <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🎓</div>
+                    <h2 style={{ fontSize: '1.8rem', color: 'var(--dark)', margin: 0 }}>Student Login</h2>
+                    <p style={{ color: 'var(--gray)', fontSize: '0.95rem', marginTop: '5px' }}>Welcome back! Ready to solve?</p>
                 </div>
-                <form onSubmit={handleSubmit} className="login-form">
-                    {error && <div className="error-message">{error}</div>}
 
-                    <div className="form-group">
-                        <label>Full Name</label>
-                        <input type="text" name="name" required />
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    {error && <div className="error-message" style={{ margin: 0 }}>{error}</div>}
+
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', fontWeight: 500 }}>Full Name</label>
+                        <input type="text" name="name" required className="modern-input" placeholder="e.g. John Doe" />
                     </div>
-                    <div className="form-group">
-                        <label>Program</label>
-                        <select name="program" required>
+
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', fontWeight: 500 }}>Program</label>
+                        <select name="program" required className="modern-input">
                             <option value="">Select Program</option>
                             <option value="MSc AI">MSc AI</option>
                             <option value="MSc CS">MSc CS</option>
                         </select>
                     </div>
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="password" name="password" required />
+
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', fontWeight: 500 }}>Password</label>
+                        <input type="password" name="password" required className="modern-input" placeholder="••••••••" />
                     </div>
 
-                    <button type="submit" disabled={loading} className="btn btn-primary" style={{ width: '100%' }}>
-                        {loading ? 'Logging in...' : 'Login'}
+                    <button type="submit" disabled={loading} className="btn-modern primary" style={{ width: '100%', padding: '12px', marginTop: '10px', fontSize: '1rem' }}>
+                        {loading ? 'Logging in...' : 'Sign In'}
                     </button>
                 </form>
-                <div style={{ marginTop: 15, textAlign: 'center' }}>
-                    <a href="/auth/student/register">Register new student</a>
+
+                <div style={{ marginTop: '25px', textAlign: 'center', fontSize: '0.9rem' }}>
+                    <a href="/auth/student/register" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 500 }}>Register new student account</a>
                     <br /><br />
-                    <a href="/" style={{ color: '#6b7280' }}>Back to Home</a>
+                    <a href="/" style={{ color: 'var(--gray)', textDecoration: 'none' }}>&larr; Back to Home</a>
                 </div>
             </div>
         </div>
