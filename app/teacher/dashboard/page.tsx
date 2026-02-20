@@ -28,7 +28,7 @@ export default async function TeacherDashboard() {
 
     return (
         <div style={{
-            minHeight: '100%',
+            flex: 1,
             padding: '40px 20px 60px',
             position: 'relative'
         }}>
