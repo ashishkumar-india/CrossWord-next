@@ -31,7 +31,7 @@ export default function CreatePuzzle() {
 
     // Live preview
     const preview: CrosswordResult | null = useMemo(() => {
-        if (validWords.length < 2) return null;
+        if (validWords.length < 1) return null;
         return buildCompactCrossword(validWords, seed);
     }, [words, seed]);
 
