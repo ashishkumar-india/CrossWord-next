@@ -19,12 +19,25 @@ export async function POST(req: Request) {
         const hashedPassword = await bcrypt.hash(password, 12);
         const { error } = await db.from('teachers').insert({ name, email: email.toLowerCase(), password: hashedPassword });
         if (error) {
-            console.error('Supabase Teacher Insert Error:', error);
-            return NextResponse.json({ error: error.message || 'Registration failed' }, { status: 500 });
+            console.error('Supabase Teacher Insert Error DEBUG:', {
+                message: error.message,
+                details: error.details,
+                hint: error.hint,
+                code: error.code
+            });
+            return NextResponse.json({
+                error: 'Registration failed',
+                debug: error.message
+            }, { status: 500 });
         }
 
         return NextResponse.json({ success: true });
-    } catch {
-        return NextResponse.json({ error: 'Server error' }, { status: 500 });
+    } catch (err: any) {
+        console.error('Registration Catch Error:', err);
+        return NextResponse.json({
+            error: 'Server error',
+            debug: err.message,
+            stack: err.stack
+        }, { status: 500 });
     }
 }
